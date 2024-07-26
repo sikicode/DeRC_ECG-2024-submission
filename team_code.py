@@ -197,7 +197,7 @@ def load_model_layers(model, directory="model_layers"):
     for name, param in model.named_parameters():
         file_path = os.path.join(directory, f"{name.replace('.', '_')}.pt")
         if os.path.exists(file_path):
-            param_data = torch.load(file_path)
+            param_data = torch.load(file_path, map_location=torch.device('cpu'))
             param.data = param_data
 
 def get_classification_model():
