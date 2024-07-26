@@ -439,7 +439,7 @@ def run_models(record, digitization_model, classification_model, verbose):
     features = features.reshape(1, -1)
 
     # For a overly simply minimal working example, generate "random" waveforms.
-    seed = int(round(model + np.mean(features)))
+    seed = int(round(model))
     signal = np.random.default_rng(seed=seed).uniform(low=-1000, high=1000, size=(num_samples, num_signals))
     signal = np.asarray(signal, dtype=np.int16)
     
