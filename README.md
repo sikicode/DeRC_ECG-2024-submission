@@ -123,22 +123,21 @@ If you have trouble running your code, then please try the follow steps to run t
 
 3. Download or clone this repository in your terminal.
 
-        user@computer:~/example$ git clone https://github.com/saif-sust/physionet2024.git
-
+        user@computer:~/example$ git clone https://github.com/sikicode/DeRC_ECG-2024-submission.git
 4. Build a Docker image and run the example code in your terminal.
 
         user@computer:~/example$ ls
         model  physionet2024  test_data  test_outputs  training_data
 
-        user@computer:~/example$ cd physionet2024/
+        user@computer:~/example$ cd DeRC_ECG-2024-submission/
 
-        user@computer:~/example/physionet2024$ docker build -t image .
+        user@computer:~/example/DeRC_ECG-2024-submission$ docker build -t image .
 
         Sending build context to Docker daemon  [...]kB
         [...]
         Successfully tagged image:latest
 
-        user@computer:~/example/physionet2024$ docker run -it -v ~/example/model:/challenge/model -v ~/example/test_data:/challenge/test_data -v ~/example/test_outputs:/challenge/test_outputs -v ~/example/training_data:/challenge/training_data image bash
+        user@computer:~/example/DeRC_ECG-2024-submission$ docker run -it -v ~/example/model:/challenge/model -v ~/example/test_data:/challenge/test_data -v ~/example/test_outputs:/challenge/test_outputs -v ~/example/training_data:/challenge/training_data image bash
 
         root@[...]:/challenge# ls
             Dockerfile             README.md         test_outputs
