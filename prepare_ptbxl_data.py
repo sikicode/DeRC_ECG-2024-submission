@@ -17,7 +17,7 @@ def get_parser():
     description = 'Prepare the PTB-XL database for use in the Challenge.'
     parser = argparse.ArgumentParser(description=description)
     parser.add_argument('-i', '--input_folder', type=str, required=True)
-    parser.add_argument('-p', '--ptbxl_database_file', type=str, required=True) # ptbxl_database.csv
+    parser.add_argument('-d', '--ptbxl_database_file', type=str, required=True) # ptbxl_database.csv
     parser.add_argument('-s', '--ptbxl_mapping_file', type=str, required=True) # scp_statements.csv
     parser.add_argument('-sd', '--sl_database_file', type=str, required=True) # 12sl_statements.csv
     parser.add_argument('-sm', '--sl_mapping_file', type=str, required=True) # 12slv23ToSNOMED.csv
