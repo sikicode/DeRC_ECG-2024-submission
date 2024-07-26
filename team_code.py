@@ -16,6 +16,7 @@ from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
 import sys
 
 from helper_code import *
+from weijie_model import *
 
 ################################################################################
 #
@@ -23,10 +24,7 @@ from helper_code import *
 #
 ################################################################################
 
-# Train your models. This function is *required*. You should edit this function to add your code, but do *not* change the arguments
-# of this function. If you do not train one of the models, then you can return None for the model.
-
-# Train your digitization model.
+# Train your digitization and classification models.
 def train_models(data_folder, model_folder, verbose):
     # Find the data files.
     if verbose:
@@ -135,26 +133,38 @@ def run_models(record, digitization_model, classification_model, verbose):
     num_signals = get_num_signals(header)
 
     # Extract the features.
-    features = extract_features(record)
-    features = features.reshape(1, -1)
+    # features = extract_features(record)
+    # features = features.reshape(1, -1)
 
-    # Generate "random" waveforms using the a random seed from the features.
+    # For a overly simply minimal working example, generate "random" waveforms.
     seed = int(round(model + np.mean(features)))
-    signal = np.random.default_rng(seed=seed).uniform(low=-1, high=1, size=(num_samples, num_signals))
+    signal = np.random.default_rng(seed=seed).uniform(low=-1000, high=1000, size=(num_samples, num_signals))
+    signal = np.asarray(signal, dtype=np.int16)
     
     # Run the classification model; if you did not train this model, then you can set labels = None.
 
+    # Sample path
+    path = record
+    # Split the path by '/'
+    # parts = path.split('/')
+    
+    # Remove the last portion
+    # new_path = '/'.join(parts[:-1])
+    # print(f'run_classification_model -> data_record: {record}')
+    # print(f'record: {record} -- new_path: {new_path}')
+    labels = load_data_weijie(path)
+    
     # Load the classification model and classes.
-    model = classification_model['model']
-    classes = classification_model['classes']
+    # model = classification_model['model']
+    # classes = classification_model['classes']
 
     # Get the model probabilities.
-    probabilities = model.predict_proba(features)
-    probabilities = np.asarray(probabilities, dtype=np.float32)[:, 0, 1]
+    # probabilities = model.predict_proba(features)
+    # probabilities = np.asarray(probabilities, dtype=np.float32)[:, 0, 1]
 
     # Choose the class or classes with the highest probability as the label or labels.
-    max_probability = np.nanmax(probabilities)
-    labels = [classes[i] for i, probability in enumerate(probabilities) if probability == max_probability]
+    # max_probability = np.nanmax(probabilities)
+    # labels = [classes[i] for i, probability in enumerate(probabilities) if probability == max_probability]
 
     return signal, labels
 
@@ -166,7 +176,7 @@ def run_models(record, digitization_model, classification_model, verbose):
 
 # Extract features.
 def extract_features(record):
-    images = load_images(record)
+    images = load_image(record)
     mean = 0.0
     std = 0.0
     for image in images:
