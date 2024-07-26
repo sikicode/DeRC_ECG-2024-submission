@@ -440,7 +440,7 @@ def run_models(record, digitization_model, classification_model, verbose):
 
     # For a overly simply minimal working example, generate "random" waveforms.
     seed = int(round(model))
-    signal = np.random.default_rng(seed=seed).uniform(low=-1000, high=1000, size=(num_samples, num_signals))
+    signal = np.random.default_rng(seed=seed).uniform(low=-10, high=10, size=(num_samples, num_signals))
     signal = np.asarray(signal, dtype=np.float32)
     
     # Run the classification model; if you did not train this model, then you can set labels = None.
