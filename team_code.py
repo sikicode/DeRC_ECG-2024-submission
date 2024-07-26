@@ -341,9 +341,9 @@ def train_models(data_folder, model_folder, verbose):
     if verbose:
         print('Extracting features and labels from the data...')
 
-    digitization_features = list()
-    classification_features = list()
-    classification_labels = list()
+    # digitization_features = list()
+    # classification_features = list()
+    # classification_labels = list()
 
     # Iterate over the records.
     for i in range(num_records):
@@ -351,56 +351,56 @@ def train_models(data_folder, model_folder, verbose):
             width = len(str(num_records))
             print(f'- {i+1:>{width}}/{num_records}: {records[i]}...')
 
-        record = os.path.join(data_folder, records[i])
+        # record = os.path.join(data_folder, records[i])
 
         # Extract the features from the image; this simple example uses the same features for the digitization and classification
         # tasks.
-        features = extract_features(record)
+        # features = extract_features(record)
         
-        digitization_features.append(features)
+        # digitization_features.append(features)
 
         # Some images may not be labeled...
-        labels = load_labels(record)
-        if any(label for label in labels):
-            classification_features.append(features)
-            classification_labels.append(labels)
+        # labels = load_labels(record)
+        # if any(label for label in labels):
+            # classification_features.append(features)
+            # classification_labels.append(labels)
 
     # ... but we expect some images to be labeled for classification.
-    if not classification_labels:
-        raise Exception('There are no labels for the data.')
+    # if not classification_labels:
+        # raise Exception('There are no labels for the data.')
 
     # Train the models.
-    if verbose:
-        print('Training the models on the data...')
+    # if verbose:
+        # print('Training the models on the data...')
 
     # Train the digitization model. This very simple model uses the mean of these very simple features as a seed for a random number
     # generator.
-    digitization_model = np.mean(features)
+    # digitization_model = np.mean(features)
 
     # Train the classification model. If you are not training a classification model, then you can remove this part of the code.
     
     # This very simple model trains a random forest model with these very simple features.
-    classification_features = np.vstack(classification_features)
-    classes = sorted(set.union(*map(set, classification_labels)))
-    classification_labels = compute_one_hot_encoding(classification_labels, classes)
+    # classification_features = np.vstack(classification_features)
+    # classes = sorted(set.union(*map(set, classification_labels)))
+    # classification_labels = compute_one_hot_encoding(classification_labels, classes)
 
     # Define parameters for random forest classifier and regressor.
-    n_estimators   = 12  # Number of trees in the forest.
-    max_leaf_nodes = 34  # Maximum number of leaf nodes in each tree.
-    random_state   = 56  # Random state; set for reproducibility.
+    # n_estimators   = 12  # Number of trees in the forest.
+    # max_leaf_nodes = 34  # Maximum number of leaf nodes in each tree.
+    # random_state   = 56  # Random state; set for reproducibility.
 
     # Fit the model.
-    classification_model = RandomForestClassifier(
-        n_estimators=n_estimators, max_leaf_nodes=max_leaf_nodes, random_state=random_state).fit(classification_features, classification_labels)
+    # classification_model = RandomForestClassifier(
+    #    n_estimators=n_estimators, max_leaf_nodes=max_leaf_nodes, random_state=random_state).fit(classification_features, classification_labels)
 
     # Create a folder for the models if it does not already exist.
-    os.makedirs(model_folder, exist_ok=True)
+    # os.makedirs(model_folder, exist_ok=True)
 
     # Save the models.
-    save_models(model_folder, digitization_model, classification_model, classes)
+    # save_models(model_folder, digitization_model, classification_model, classes)
 
     if verbose:
-        print ("Weijie - We should not train the data, we use the pretrain data")
+        # print ("Weijie - We should not train the data, we use the pretrain data")
         print('Done.')
         print()
 
