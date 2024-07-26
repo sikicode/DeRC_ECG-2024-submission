@@ -15,6 +15,9 @@ import os
 from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
 import sys
 
+from helper_code import *
+from weijie_model import *
+
 ################################################################################
 #
 # Required functions. Edit these functions to add your code, but do not change the arguments of the functions.
