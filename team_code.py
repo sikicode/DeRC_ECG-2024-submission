@@ -272,6 +272,7 @@ def load_data_weijie(data_path):
     
     current_directory = get_current_directory()    
     # PATH = '/home/weijiesun/physinet2024/model/UNet_torch.model' #./model/UNet_torch.model'
+    # Weijie Need to update
     denoise_model = get_denoise_model().to(device)
     # denoise_model = torch.load(path_unet, map_location ='cpu').to(device)
     denoise_model.eval()
@@ -280,19 +281,13 @@ def load_data_weijie(data_path):
     model = get_classification_model().to(device)
     model.eval()
 
-    #TODO Saiful needs to delete use own temp_list    
-    temp_path = data_path + '-0.png'
-    temp_list = [temp_path]
-    print ('Weijie: data_path',data_path)
+    pattern = re.compile(r'.*\.(png|jpg|jpeg)$')
+    temp_list = [f for f in os.listdir(data_path) if pattern.match(f)]
+    # temp_path = data_path + '-0.png'
+    temp_list = [temp_list[0]]
+    # print ('Weijie: data_path',data_path)
     # print(f'temp_list - new: datapath: {data_path} -- temp_list: {temp_list}')
     print ('Weijie: feel there is a problem', len(temp_list), temp_path)
-    # print (f'le: - {len(temp_list)}')
-    # label_list = []
-    # label_df = pd.read_csv('/data/padmalab/ecg/data/external/PhysioNet2024_Data/physionet.org/files/ptb-xl/1.0.3/ptbxl_label_df.csv')
-    # for temp_ecg in temp_list:
-    #     label = label_df[label_df['ecg_id'] == int(temp_ecg.split('/')[-1].split('_')[0])]['Normal_ECG'].iloc[0]
-    #     label_list.append(label)
-    # print (len(label_list))
 
     batch_size = 1
     # temp_list = temp_list[:1]
