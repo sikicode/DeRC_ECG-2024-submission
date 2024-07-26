@@ -432,7 +432,10 @@ def run_models(record, digitization_model, classification_model, verbose):
 
     print(record)
     # Extract the features.
-    features = extract_features(record)
+    try:
+        features = extract_features(record + "-0.png")
+    except RuntimeError as e:
+        features = extract_features(record)
     features = features.reshape(1, -1)
 
     # For a overly simply minimal working example, generate "random" waveforms.
@@ -441,10 +444,6 @@ def run_models(record, digitization_model, classification_model, verbose):
     signal = np.asarray(signal, dtype=np.int16)
     
     # Run the classification model; if you did not train this model, then you can set labels = None.
-
-    # Sample path
-    path = record
-    print(path)
     # Split the path by '/'
     # parts = path.split('/')
     
@@ -452,7 +451,7 @@ def run_models(record, digitization_model, classification_model, verbose):
     # new_path = '/'.join(parts[:-1])
     # print(f'run_classification_model -> data_record: {record}')
     # print(f'record: {record} -- new_path: {new_path}')
-    labels = load_data_weijie(path)
+    labels = load_data_weijie(record)
     return signal, labels
 
 ################################################################################
