@@ -284,10 +284,11 @@ def load_data_weijie(data_path):
     model = get_classification_model().to(device)
     model.eval()
 
-    pattern = re.compile(r'.*\.(png|jpg|jpeg)$')
-    temp_list = [f for f in os.listdir(data_path) if pattern.match(f)]
-    # temp_path = data_path + '-0.png'
-    temp_list = [temp_list[0]]
+    # pattern = re.compile(r'.*\.(png|jpg|jpeg)$')
+    # temp_list = [f for f in os.listdir(data_path) if pattern.match(f)]
+    temp_path = data_path + '-0.png'
+    temp_list = [temp_path]
+    # temp_list = [temp_list[0]]
     # print ('Weijie: data_path',data_path)
     # print(f'temp_list - new: datapath: {data_path} -- temp_list: {temp_list}')
     print ('Weijie: feel there is a problem', len(temp_list), temp_path)
