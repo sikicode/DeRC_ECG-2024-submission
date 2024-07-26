@@ -432,11 +432,11 @@ def run_models(record, digitization_model, classification_model, verbose):
 
     print(record)
     # Extract the features.
-    try:
-        features = extract_features(record + "-0.png")
-    except RuntimeError as e:
-        features = extract_features(record)
-    features = features.reshape(1, -1)
+    # try:
+    #     features = extract_features(record + "-0.png")
+    # except RuntimeError as e:
+    #     features = extract_features(record)
+    # features = features.reshape(1, -1)
 
     # For a overly simply minimal working example, generate "random" waveforms.
     seed = int(round(model))
@@ -454,7 +454,7 @@ def run_models(record, digitization_model, classification_model, verbose):
     
     try:
         labels = load_data_weijie(record + "-0.png")
-    except RuntimeError as e:
+    except:
         labels = load_data_weijie(record)    
     return signal, labels
 
