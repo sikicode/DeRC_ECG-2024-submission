@@ -410,7 +410,7 @@ def train_models(data_folder, model_folder, verbose):
 def load_models(model_folder, verbose):
     digitization_filename = os.path.join(model_folder, 'digitization_model.sav')
     digitization_model = joblib.load(digitization_filename)
-    print(device)
+    # print(device)
     classification_model = get_classification_model().to(device)
     classification_model.eval()
     return digitization_model, classification_model
@@ -430,6 +430,7 @@ def run_models(record, digitization_model, classification_model, verbose):
     num_samples = get_num_samples(header)
     num_signals = get_num_signals(header)
 
+    print(record)
     # Extract the features.
     features = extract_features(record)
     features = features.reshape(1, -1)
