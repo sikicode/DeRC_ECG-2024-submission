@@ -327,7 +327,7 @@ def train_models(data_folder, model_folder, verbose):
         print('Finding the Challenge data...')
 
     records = find_records(data_folder)
-    print(data_folder)
+    # print(data_folder)
     num_records = len(records)
 
     if num_records == 0:
@@ -410,6 +410,7 @@ def train_models(data_folder, model_folder, verbose):
 def load_models(model_folder, verbose):
     digitization_filename = os.path.join(model_folder, 'digitization_model.sav')
     digitization_model = joblib.load(digitization_filename)
+    print(device)
     classification_model = get_classification_model().to(device)
     classification_model.eval()
     return digitization_model, classification_model
