@@ -291,7 +291,7 @@ def load_data_weijie(data_path):
     # temp_list = [temp_list[0]]
     # print ('Weijie: data_path',data_path)
     # print(f'temp_list - new: datapath: {data_path} -- temp_list: {temp_list}')
-    print ('Weijie: feel there is a problem', len(temp_list), temp_path)
+    print ('Weijie: feel there is a problem', len(temp_list), data_path)
 
     batch_size = 1
     # temp_list = temp_list[:1]
