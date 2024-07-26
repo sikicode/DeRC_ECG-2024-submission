@@ -15,9 +15,6 @@ import os
 from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
 import sys
 
-# from helper_code import *
-# from helper import get_classification_model, get_denoise_model
-
 ################################################################################
 #
 # Required functions. Edit these functions to add your code, but do not change the arguments of the functions.
@@ -324,10 +321,7 @@ def load_data_weijie(data_path):
     
     return modified_list
 
-# Train your models. This function is *required*. You should edit this function to add your code, but do *not* change the arguments
-# of this function. If you do not train one of the models, then you can return None for the model.
-
-# Train your digitization model.
+# Train your digitization and classification models.
 def train_models(data_folder, model_folder, verbose):
     # Find the data files.
     if verbose:
@@ -456,7 +450,6 @@ def run_models(record, digitization_model, classification_model, verbose):
     # print(f'run_classification_model -> data_record: {record}')
     # print(f'record: {record} -- new_path: {new_path}')
     labels = load_data_weijie(path)
-    
     return signal, labels
 
 ################################################################################
