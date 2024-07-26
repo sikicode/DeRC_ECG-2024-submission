@@ -16,7 +16,6 @@ from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
 import sys
 
 from helper_code import *
-from weijie_model import *
 
 ################################################################################
 #
