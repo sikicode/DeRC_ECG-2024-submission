@@ -443,6 +443,7 @@ def run_models(record, digitization_model, classification_model, verbose):
 
     # Sample path
     path = record
+    print(path)
     # Split the path by '/'
     # parts = path.split('/')
     
