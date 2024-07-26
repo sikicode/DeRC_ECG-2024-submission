@@ -123,8 +123,7 @@ If you have trouble running your code, then please try the follow steps to run t
 
 3. Download or clone this repository in your terminal.
 
-        user@computer:~/example$ git clone https://github.com/saif-sust/physionet2024.git
-
+        user@computer:~/example$ git clone https://github.com/sikicode/DeRC_ECG-2024-submission.git
 4. Build a Docker image and run the example code in your terminal.
 
         user@computer:~/example$ ls
