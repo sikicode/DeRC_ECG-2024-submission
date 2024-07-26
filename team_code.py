@@ -431,8 +431,8 @@ def run_models(record, digitization_model, classification_model, verbose):
     num_signals = get_num_signals(header)
 
     # Extract the features.
-    # features = extract_features(record)
-    # features = features.reshape(1, -1)
+    features = extract_features(record)
+    features = features.reshape(1, -1)
 
     # For a overly simply minimal working example, generate "random" waveforms.
     seed = int(round(model + np.mean(features)))
