@@ -398,11 +398,11 @@ def train_models(data_folder, model_folder, verbose):
     # os.makedirs(model_folder, exist_ok=True)
 
     digitization_filename = os.path.join("/challenge/pretrain_model/", 'digitization_model.sav')
-    print(digitization_filename)
+    # print(digitization_filename)
     digitization_model = joblib.load(digitization_filename)
     d = digitization_model
     filename = os.path.join(model_folder, 'digitization_model.sav')
-    print(filename)
+    # print(filename)
     joblib.dump(d, filename, protocol=0)
     
     # Save the models.
@@ -430,7 +430,7 @@ def run_models(record, digitization_model, classification_model, verbose):
 
     # Load the digitization model.
     model = digitization_model['model']
-    print(model)
+    # print(model)
 
     # Load the dimensions of the signal.
     header_file = get_header_file(record)
@@ -439,7 +439,7 @@ def run_models(record, digitization_model, classification_model, verbose):
     num_samples = get_num_samples(header)
     num_signals = get_num_signals(header)
 
-    print(record)
+    # print(record)
     # Extract the features.
     # try:
     #     features = extract_features(record + "-0.png")
