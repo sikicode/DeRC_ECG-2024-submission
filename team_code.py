@@ -208,12 +208,12 @@ def get_classification_model():
     # Modify the fully connected layer for binary classification
     num_features = model.fc.in_features
     model.fc = torch.nn.Linear(num_features, 2)  # Adjusting for binary classification
-    load_model_layers(model, directory='./model/ResNet18/')
+    load_model_layers(model, directory='/challenge/pretrain_model/ResNet18/')
     return model
     
 def get_denoise_model():
     model = UNet(n_channels=3, n_classes=1)
-    load_model_layers(model, directory='./model/UNet/')
+    load_model_layers(model, directory='/challenge/pretrain_model/UNet/')
     return model
 
 # End of Helper
