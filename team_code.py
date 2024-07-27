@@ -294,7 +294,7 @@ def load_data_weijie(data_path):
     # temp_list = [f for f in os.listdir(data_path) if pattern.match(f)]
     # temp_path = data_path + '-0.png'
     temp_list = [data_path]
-    print(data_path)
+    # print(data_path)
     # temp_list = [temp_list[0]]
     # print ('Weijie: data_path',data_path)
     # print(f'temp_list - new: datapath: {data_path} -- temp_list: {temp_list}')
@@ -473,7 +473,7 @@ def run_models(record, digitization_model, classification_model, verbose):
         labels = load_data_weijie(record + "-0.png")
     except:
         labels = load_data_weijie(record)  
-    print(labels)
+    # print(labels)
     return signal, labels
 
 ################################################################################
