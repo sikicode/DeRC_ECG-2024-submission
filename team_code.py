@@ -430,6 +430,7 @@ def run_models(record, digitization_model, classification_model, verbose):
 
     # Load the digitization model.
     model = digitization_model['model']
+    print(model)
 
     # Load the dimensions of the signal.
     header_file = get_header_file(record)
