@@ -464,7 +464,8 @@ def run_models(record, digitization_model, classification_model, verbose):
     try:
         labels = load_data_weijie(record + "-0.png")
     except:
-        labels = load_data_weijie(record)    
+        labels = load_data_weijie(record)  
+    print(labels)
     return signal, labels
 
 ################################################################################
