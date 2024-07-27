@@ -2,7 +2,12 @@ FROM python:3.10.1-buster
 
 ## DO NOT EDIT these 3 lines.
 RUN mkdir /challenge
+RUN mkdir /challenge/pretrain_model
+## RUN mkdir /challenge/pretrain_model/ResNet18
+## RUN mkdir /challenge/pretrain_model/UNet
 COPY ./ /challenge
+## COPY ./model/classification_model.sav /challenge/pretrain_model/
+COPY ./model /challenge/pretrain_model
 WORKDIR /challenge
 
 ## Install your dependencies here using apt install, etc.
