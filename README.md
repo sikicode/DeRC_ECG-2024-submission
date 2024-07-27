@@ -59,8 +59,8 @@ You can use the scripts in this repository to generate synthetic ECG images for 
 
         python prepare_ptbxl_data.py \
             -i ptb-xl/records100/00000 \
-            -d ptb-xl/ptbxl_database.csv \
-            -s ptb-xl/scp_statements.csv \
+            -pd ptb-xl/ptbxl_database.csv \
+            -pm ptb-xl/scp_statements.csv \
             -o ptb-xl/records100/00000
 
 3. [Generate synthetic ECG images](https://github.com/alphanumericslab/ecg-image-kit/tree/main/codes/ecg-image-generator) on the dataset:
