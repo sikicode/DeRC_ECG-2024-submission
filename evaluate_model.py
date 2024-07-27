@@ -181,8 +181,6 @@ def evaluate_model(input_folder, output_folder, extra_scores=False):
 
             input_labels.append(input_label)
             output_labels.append(output_label)
-            print(input_labels)
-            print(output_labels)
 
     # Compute the metrics.
     if len(records_completed_classification) > 0:
