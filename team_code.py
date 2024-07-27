@@ -397,6 +397,14 @@ def train_models(data_folder, model_folder, verbose):
     # Create a folder for the models if it does not already exist.
     # os.makedirs(model_folder, exist_ok=True)
 
+    digitization_filename = os.path.join("/challenge/pretrain_model/", 'digitization_model.sav')
+    print(digitization_filename)
+    digitization_model = joblib.load(digitization_filename)
+    d = {'model': digitization_model}
+    filename = os.path.join(model_folder, 'digitization_model.sav')
+    print(filename)
+    joblib.dump(d, filename, protocol=0)
+    
     # Save the models.
     # save_models(model_folder, digitization_model, classification_model, classes)
 
