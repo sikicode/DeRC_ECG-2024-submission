@@ -284,11 +284,11 @@ def load_data_weijie(data_path):
     # Weijie Need to update
     denoise_model = get_denoise_model().to(device)
     # denoise_model = torch.load(path_unet, map_location ='cpu').to(device)
-    denoise_model.eval()
+    # denoise_model.eval()
     
     # PATH = '/home/weijiesun/physinet2024/model/ResNet_C_torch.model' #'./model/ResNet_C_torch.model'
     model = get_classification_model().to(device)
-    model.eval()
+    # model.eval()
 
     # pattern = re.compile(r'.*\.(png|jpg|jpeg)$')
     # temp_list = [f for f in os.listdir(data_path) if pattern.match(f)]
@@ -314,7 +314,7 @@ def load_data_weijie(data_path):
             inputs = inputs.to(device)
             inputs = inputs.reshape(1, 1, 224, 224)
             outputs = model(inputs)
-            print(outputs)
+            # print(outputs)
             _, pred_binary = torch.max(outputs, 1)
             probs = torch.nn.functional.softmax(outputs, dim=1)[:, 1]
             # targets = targets[:, 1]
