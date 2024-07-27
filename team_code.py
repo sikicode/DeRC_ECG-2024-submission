@@ -307,6 +307,7 @@ def load_data_weijie(data_path):
             inputs = inputs.to(device)
             inputs = inputs.reshape(1, 1, 224, 224)
             outputs = model(inputs)
+            print(outputs)
             _, pred_binary = torch.max(outputs, 1)
             probs = torch.nn.functional.softmax(outputs, dim=1)[:, 1]
             # targets = targets[:, 1]
