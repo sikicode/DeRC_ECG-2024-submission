@@ -45,6 +45,7 @@ def run(args):
         basename = os.path.basename(image)
         record_to_images[record].add(basename)
 
+
     # Update the header files and copy signal files.
     for record in records:
         record_path, record_basename = os.path.split(record)
