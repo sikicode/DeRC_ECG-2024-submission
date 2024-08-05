@@ -472,7 +472,11 @@ def run_models(record, digitization_model, classification_model, verbose):
     image_file_name = get_image_files(record)
     parts = record.split('/')
     new_path = '/'.join(parts[:-1])
+    #print(image_file_name)
+    #print(record)
     #print(new_path + '/' + image_file_name[0])
+    #label = load_labels(record)
+    #print(label)
     try:
         labels = load_data_weijie(new_path + '/' + image_file_name[0])
     except:
