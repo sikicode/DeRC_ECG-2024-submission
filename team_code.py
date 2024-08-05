@@ -468,9 +468,13 @@ def run_models(record, digitization_model, classification_model, verbose):
     # new_path = '/'.join(parts[:-1])
     # print(f'run_classification_model -> data_record: {record}')
     # print(f'record: {record} -- new_path: {new_path}')
-    
+
+    image_file_name = get_image_files(record)
+    parts = record.split('/')
+    new_path = '/'.join(parts[:-1])
+    #print(new_path + '/' + image_file_name[0])
     try:
-        labels = load_data_weijie(record + "-0.png")
+        labels = load_data_weijie(new_path + '/' + image_file_name[0])
     except:
         labels = load_data_weijie(record)
     # print(labels)
