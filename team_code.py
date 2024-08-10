@@ -284,17 +284,17 @@ def load_data_weijie(data_path):
     # Weijie Need to update
     denoise_model = get_denoise_model().to(device)
     # denoise_model = torch.load(path_unet, map_location ='cpu').to(device)
-    denoise_model.eval()
+    # denoise_model.eval()
     
     # PATH = '/home/weijiesun/physinet2024/model/ResNet_C_torch.model' #'./model/ResNet_C_torch.model'
     model = get_classification_model().to(device)
-    model.eval()
+    # model.eval()
 
     # pattern = re.compile(r'.*\.(png|jpg|jpeg)$')
     # temp_list = [f for f in os.listdir(data_path) if pattern.match(f)]
     # temp_path = data_path + '-0.png'
     temp_list = [data_path]
-    print(data_path)
+    # print(data_path)
     # temp_list = [temp_list[0]]
     # print ('Weijie: data_path',data_path)
     # print(f'temp_list - new: datapath: {data_path} -- temp_list: {temp_list}')
@@ -314,7 +314,7 @@ def load_data_weijie(data_path):
             inputs = inputs.to(device)
             inputs = inputs.reshape(1, 1, 224, 224)
             outputs = model(inputs)
-            print(outputs)
+            # print(outputs)
             _, pred_binary = torch.max(outputs, 1)
             probs = torch.nn.functional.softmax(outputs, dim=1)[:, 1]
             # targets = targets[:, 1]
@@ -468,12 +468,20 @@ def run_models(record, digitization_model, classification_model, verbose):
     # new_path = '/'.join(parts[:-1])
     # print(f'run_classification_model -> data_record: {record}')
     # print(f'record: {record} -- new_path: {new_path}')
-    
+
+    image_file_name = get_image_files(record)
+    parts = record.split('/')
+    new_path = '/'.join(parts[:-1])
+    #print(image_file_name)
+    #print(record)
+    #print(new_path + '/' + image_file_name[0])
+    #label = load_labels(record)
+    #print(label)
     try:
-        labels = load_data_weijie(record + "-0.png")
+        labels = load_data_weijie(new_path + '/' + image_file_name[0])
     except:
-        labels = load_data_weijie(record)  
-    print(labels)
+        labels = load_data_weijie(record)
+    # print(labels)
     return signal, labels
 
 ################################################################################

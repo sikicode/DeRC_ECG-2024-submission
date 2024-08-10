@@ -55,32 +55,45 @@ You can use the scripts in this repository to generate synthetic ECG images for 
 
 1. Download (and unzip) the [PTB-XL dataset](https://physionet.org/content/ptb-xl/). We will use `ptb-xl` as the folder name that contains the data for these commands (the full folder name for the PTB-XL dataset is currently `ptb-xl-a-large-publicly-available-electrocardiography-dataset-1.0.3`), but you can replace it with the absolute or relative path on your machine.
 
-2. Add information from various spreadsheets from the PTB-XL dataset to the WFDB header files:
+2. Add information from various spreadsheets from the PTB-XL and PTB-XL+ databases to the WFDB header files for the PTB-XL records:
 
         python prepare_ptbxl_data.py \
-            -i ptb-xl/records100/00000 \
-            -d ptb-xl/ptbxl_database.csv \
-            -s ptb-xl/scp_statements.csv \
-            -o ptb-xl/records100/00000
+            -i  ptb-xl/records500/00000 \
+            -pd ptb-xl/ptbxl_database.csv \
+            -pm ptb-xl/scp_statements.csv \
+            -sd ptb-xl/12sl_statements.csv \
+            -sm ptb-xl/12slv23ToSNOMED.csv \
+            -o  ptb-xl/records500/00000
 
 3. [Generate synthetic ECG images](https://github.com/alphanumericslab/ecg-image-kit/tree/main/codes/ecg-image-generator) on the dataset:
 
         python gen_ecg_images_from_data_batch.py \
-            -i ptb-xl/records100/00000 \
-            -o ptb-xl/records100/00000 \
+            -i ptb-xl/records500/00000 \
+            -o ptb-xl/records500/00000 \
             --print_header
 
-4. Add the file locations for the synthetic ECG images to the WFDB header files. (The expected image filenames for record `12345.png` are of the form `12345-0.png`, `12345-1.png`, etc., which should be in the same folder.) You can use the `ptb-xl/records100/00000` folder for the `train_model` step:
+4. Add the file locations and other information for the synthetic ECG images to the WFDB header files. (The expected image filenames for record `12345` are of the form `12345-0.png`, `12345-1.png`, etc., which should be in the same folder.) You can use the `ptb-xl/records500/00000` folder for the `train_model` step:
 
-        python add_image_filenames.py \
-            -i ptb-xl/records100/00000 \
-            -o ptb-xl/records100/00000
+        python prepare_image_data.py \
+            -i ptb-xl/records500/00000 \
+            -o ptb-xl/records500/00000
 
-5. Remove the waveforms, certain information about the waveforms, and the demographics and diagnoses to create a version of the data for inference. You can use the `ptb-xl/records100_hidden/00000` folder for the `run_model` step, but it would be better to repeat the above steps on a new subset of the data that you will not use to train your model:
+5. Remove the waveforms, certain information about the waveforms, and the demographics and classes to create a version of the data for inference. You can use the `ptb-xl/records500_hidden/00000` folder for the `run_model` step, but it would be better to repeat the above steps on a new subset of the data that you will not use to train your model:
+
+        python gen_ecg_images_from_data_batch.py \
+            -i ptb-xl/records500/00000 \
+            -o ptb-xl/records500_hidden/00000 \
+            --print_header \
+            --mask_unplotted_samples
+
+        python prepare_image_data.py \
+            -i ptb-xl/records500_hidden/00000 \
+            -o ptb-xl/records500_hidden/00000
 
         python remove_hidden_data.py \
-            -i ptb-xl/records100/00000 \
-            -o ptb-xl/records100_hidden/00000
+            -i ptb-xl/records500_hidden/00000 \
+            -o ptb-xl/records500_hidden/00000 \
+            --include_images
 
 ## Which scripts I can edit?
 

@@ -82,7 +82,6 @@ def run(args):
         save_header(output_record, data_header)
 
         if signals is not None:
-            print(signals)
             comments = [l for l in data_header.split('\n') if l.startswith('#')]
             save_signals(output_record, signals, comments)
         if labels is not None:
