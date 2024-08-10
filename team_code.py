@@ -306,6 +306,20 @@ def load_data_weijie(data_path):
                                          noise_transform = noise_transform, denoise_model = denoise_model, device = device)
     test_dataloader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
 
+    thresholds = [0.36225042,
+     0.04905554,
+     0.29706085,
+     0.24501804,
+     0.3530571,
+     0.12362037,
+     0.029822709,
+     0.10859017,
+     0.08684414,
+     0.0737353,
+     0.070395336]
+
+    labels = ['NORM', 'Acute MI', 'Old MI', 'STTC', 'CD', 'HYP', 'PAC', 'PVC', 'AFIB/AFL', 'TACHY', 'BRADY']
+    
     prob_list = []
     target_list = []
     pred_binary_list = []
@@ -315,17 +329,26 @@ def load_data_weijie(data_path):
             inputs = inputs.reshape(1, 1, 224, 224)
             outputs = model(inputs)
             # print(outputs)
-            _, pred_binary = torch.max(outputs, 1)
-            probs = torch.nn.functional.softmax(outputs, dim=1)[:, 1]
+            # _, pred_binary = torch.max(outputs, 1)
+            # probs = torch.nn.functional.softmax(outputs, dim=1)[:, 1]
             # targets = targets[:, 1]
-            prob_list.extend(probs.detach().cpu().numpy())
+            outputs = torch.sigmoid(outputs)
+            pred_prob = outputs.detach().cpu().numpy()
+            pred_binary = pred_prob > thresholds
+            pred_binary = pred_binary.astype(int)
+            
+            prob_list.extend(pred_prob)
             # target_list.extend(targets.detach().cpu().numpy())
-            pred_binary_list.extend(pred_binary.detach().cpu().numpy())
+            pred_binary_list.extend(pred_binary)
             pbar.update(1)
     # print(f'pred_binary_list: {pred_binary_list}')
-    modified_list = ['Abnormal' if x == 1 else 'Normal' for x in pred_binary_list]
+    # modified_list = ['Abnormal' if x == 1 else 'Normal' for x in pred_binary_list]
     # print(f'pred_binary_list: {modified_list}')
-    
+    modified_list = []
+    for i in range(len(pred_binary_list)):
+        if i:
+            modified_list.append(labels[i])
+        
     return modified_list
 
 # Train your digitization and classification models.
