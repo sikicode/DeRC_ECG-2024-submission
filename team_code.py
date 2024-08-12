@@ -213,7 +213,7 @@ def get_classification_model():
 
     # Modify the fully connected layer for binary classification
     num_features = model.fc.in_features
-    model.fc = torch.nn.Linear(num_features, 2)  # Adjusting for binary classification
+    model.fc = torch.nn.Linear(num_features, 11)  # Adjusting for binary classification
     load_model_layers(model, directory='/challenge/pretrain_model/ResNet18/')
     return model
     
