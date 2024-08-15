@@ -345,10 +345,11 @@ def load_data_weijie(data_path):
     # modified_list = ['Abnormal' if x == 1 else 'Normal' for x in pred_binary_list]
     # print(f'pred_binary_list: {modified_list}')
     modified_list = []
-    for i in range(len(pred_binary_list)):
-        if i:
+
+    for i in range(len(pred_binary_list[0])):
+        if pred_binary_list[0][i]:
             modified_list.append(labels[i])
-        
+
     return modified_list
 
 # Train your digitization and classification models.
