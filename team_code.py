@@ -563,9 +563,9 @@ class PPNet(nn.Module):
 
 
 def construct_PPNet(base_architecture='vgg19', pretrained=False, img_size=224,
-                    prototype_shape=(2000, 512, 1, 1), num_classes=200,
+                    prototype_shape=(352, 128, 1, 1), num_classes=11,
                     prototype_activation_function='log',
-                    add_on_layers_type='bottleneck'):
+                    add_on_layers_type='regular'):
     features = base_architecture_to_features[base_architecture](pretrained=pretrained)
     layer_filter_sizes, layer_strides, layer_paddings = features.conv_info()
     proto_layer_rf_info = compute_proto_layer_rf_info_v2(img_size=img_size,
